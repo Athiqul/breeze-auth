@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Vendor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Admin Dashboard
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard',Admin::class)->name('admin.dashboard');
+})->middleware('role:admin');
+
+//Vendor
+Route::prefix('vendor')->group(function () {
+    Route::get('/dashboard',Vendor::class)->name('vendor.dashboard');
+})->middleware('role:vendor');
 Route::get('/', function () {
     return view('welcome');
 });
