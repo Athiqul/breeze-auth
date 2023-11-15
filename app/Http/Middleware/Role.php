@@ -15,9 +15,12 @@ class Role
      */
     public function handle(Request $request, Closure $next,string $role): Response
     {
-        if(!$request->user()->hasRole($role))
+        //dd($request->user()->role);
+
+        if($request->user()?->role!=($role))
         {
-            return redirect('/');
+
+            return back();
         }
         return $next($request);
     }

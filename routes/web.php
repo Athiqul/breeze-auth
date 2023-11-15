@@ -18,16 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 //Admin Dashboard
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard',Admin::class)->name('admin.dashboard');
-})->middleware('role:admin');
+    Route::get('/dashboard',Admin::class)->name('admin.dashboard')->middleware(['auth','role:admin']);
+});
 
 //Vendor
 Route::prefix('vendor')->group(function () {
-    Route::get('/dashboard',Vendor::class)->name('vendor.dashboard');
-})->middleware('role:vendor');
+    Route::get('/dashboard',Vendor::class)->name('vendor.dashboard')->middleware(['auth','role:vendor']);
+});
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('guest');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
